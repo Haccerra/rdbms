@@ -29,7 +29,7 @@
 #define TEXT_COLOUR_GREEN          "\e[92m"
 #define TEXT_COLOUR_YELLOW         "\e[93m"
 #define TEXT_COLOUR_BLUE           "\e[34m"
-#define TEXT_COLOUR_PURPLE         "\e[35m"
+#define TEXT_COLOUR_MAGENTA        "\e[35m"
 #define TEXT_COLOUR_CYAN           "\e[36m"
 #define TEXT_COLOUR_WHITE          "\e[97m"
 
@@ -39,6 +39,6 @@
 #define BACKGROUND_COLOUR_GREEN    "\e[42m"
 #define BACKGROUND_COLOUR_YELLOW   "\e[43m"
 #define BACKGROUND_COLOUR_BLUE     "\e[44m"
-#define BACKGROUND_COLOUR_PURPLЕ   "\e[45m"
+#define BACKGROUND_COLOUR_MAGENTA  "\e[45m"
 #define BACKGROUND_COLOUR_CYAN     "\e[46m"
 #define BACKGROUND_COLOUR_WHITE    "\e[107m"

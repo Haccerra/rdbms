@@ -1,5 +1,5 @@
-flex parsing/parser.l
+flex parsing/source/parser.l
 
-g++ -g -Iconsole -Iparsing lex.yy.c -o a.out
+g++ -g -Iconsole -Iparsing/include lex.yy.c -o a.out
 
 rm -f lex.yy.c 
