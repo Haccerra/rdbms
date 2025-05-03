@@ -29,7 +29,7 @@
 #define TEXT_COLOUR_GREEN          "\e[92m"
 #define TEXT_COLOUR_YELLOW         "\e[93m"
 #define TEXT_COLOUR_BLUE           "\e[34m"
-#define TEXT_COLOUR_MAGENTA        "\e[35m"
+#define TEXT_COLOUR_MAGENTA        "\e[95m"
 #define TEXT_COLOUR_CYAN           "\e[36m"
 #define TEXT_COLOUR_WHITE          "\e[97m"
 
