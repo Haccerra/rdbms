@@ -2,7 +2,7 @@
 
 
 #include <assert.h>
-#include "data.l"
+#include "data.shard.l"
 
 
 static void stack_init(void);

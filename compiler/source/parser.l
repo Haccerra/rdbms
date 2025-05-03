@@ -6,8 +6,8 @@
 #include "console_formater.h"
 
 
-#include "data.l"
-#include "stack.l"
+#include "data.shard.l"
+#include "stack.shard.l"
 
 
 extern char  user_instruction_input_buffer[ALLOWED_EXPRESSION_SIZE];
