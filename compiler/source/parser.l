@@ -1,7 +1,4 @@
 %{
-#define INPUT_BUFFER_SIZE 2048U
-
-
 #include "types.h"
 #include "operators.h"
 #include "functions.h"
@@ -9,8 +6,13 @@
 #include "console_formater.h"
 
 
-extern char input_buffer[INPUT_BUFFER_SIZE];
-char input_buffer[INPUT_BUFFER_SIZE];
+#include "data.l"
+#include "stack.l"
+
+
+extern char  user_instruction_input_buffer[ALLOWED_EXPRESSION_SIZE];
+extern char* user_instruction_input_cursor;
+extern struct parsed_data_stack data_stack;
 %}
 
 
@@ -152,14 +154,14 @@ int main(int argc, char** argv)
 {
 	while (true)
 	{
-		fgets(input_buffer, sizeof input_buffer, stdin);
+		fgets(user_instruction_input_buffer, sizeof user_instruction_input_buffer, stdin);
 		
-		if ('\n' == input_buffer[0])
+		if ('\n' == user_instruction_input_buffer[0])
 		{
-			input_buffer[0] = '\0';
+			user_instruction_input_buffer[0] = '\0';
 			continue;
 		}
-		yy_scan_string(input_buffer);
+		yy_scan_string(user_instruction_input_buffer);
 		
 		
 		int parsed_text_code;
