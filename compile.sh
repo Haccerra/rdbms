@@ -8,6 +8,7 @@ g++ -g \
 	-Icompiler/source \
 lex.yy.c \
 compiler/source/SQL_select_CFG.c \
+compiler/source/checkpoint.c \
 compiler/flexdata/shards/data.shard.c \
 compiler/flexdata/shards/stack.shard.c \
 compiler/flexdata/shards/parser_functions.shard.c \

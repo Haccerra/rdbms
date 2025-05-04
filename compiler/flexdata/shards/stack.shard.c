@@ -2,6 +2,7 @@
 #include "special_values.h"
 #include <cstddef>
 #include <stdlib.h>
+#include <stdio.h>
 
 
 struct parsed_data_stack data_stack =
@@ -23,22 +24,18 @@ struct parsed_data_stack data_stack =
 
 void stack_push(struct parsed_data* data)
 {
-	//printf("%d < %d\n", data_stack.top_pointer, ALLOWED_EXPRESSION_SIZE-1);
-	//assert(data_stack.top_pointer < (ALLOWED_EXPRESSION_SIZE-1));
 	data_stack.data[++data_stack.top_pointer] = *data;
 }
 
 
 void stack_pop(void)
 {
-	assert(data_stack.top_pointer >= 0);
 	data_stack.top_pointer--;
 }
 
 
 struct parsed_data* stack_peek(void)
 {
-	assert(data_stack.top_pointer >= 0);
 	struct parsed_data* data = &data_stack.data[data_stack.top_pointer];
 	return data;
 }

@@ -1,7 +1,6 @@
 #pragma once
 
 
-#include <assert.h>
 #include "data.shard.l"
 
 

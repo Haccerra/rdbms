@@ -3,6 +3,7 @@
 #include "stack.shard.l"
 #include "special_values.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 
 void parser_whitespace_processing(int number_of_whitespaces)
@@ -28,7 +29,7 @@ int parser_forward(void)
 
 	user_instruction_input_cursor += yyleng;
 	data_stack.push(&data);
-	
+
 	return data.parsed_text_code;
 }
 
@@ -59,7 +60,10 @@ int* parser_fastforward(unsigned int* number_of_codes)
 			codes_size <<= 1u;
 			new_codes = (int*) realloc( codes, codes_size*sizeof(int) );
 			
-			assert (NULL != new_codes);
+			if (NULL == new_codes)
+			{
+				break;
+			}
 			codes = new_codes;
 		}
 		codes[ff_counter++] = parsed_text_code;

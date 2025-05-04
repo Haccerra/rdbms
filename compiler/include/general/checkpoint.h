@@ -5,10 +5,6 @@
 #include "parser_functions.shard.l"
 #include "parsing_status.h"
 
-
-#define CREATE_CHECKPOINT(current_stack_top) \
-	current_stack_top = data_stack.top_pointer;
 	
-	
-#define RESTORE_CHECKPOINT(checkpointed_stack_top) \
-	praser_rewind(data_stack.top_pointer - checkpointed_stack_top)
+void create_checkpoint(int* current_stack_top_pointer);
+void restore_checkpoint(int checkpointed_top_pointer);
