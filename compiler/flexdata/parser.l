@@ -10,11 +10,6 @@
 #include "data.shard.l"
 #include "stack.shard.l"
 #include "parser_functions.shard.l"
-
-
-extern char  user_instruction_input_buffer[ALLOWED_EXPRESSION_SIZE];
-extern char* user_instruction_input_cursor;
-extern struct parsed_data_stack data_stack;
 %}
 
 
