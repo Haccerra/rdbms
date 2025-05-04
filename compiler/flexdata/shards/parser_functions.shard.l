@@ -10,6 +10,21 @@
 extern "C" int yylex();
 
 
+int parser_forward(void)
+{
+	struct parsed_data data;
+	data.parsed_text_code = yylex();
+	data.parsed_text_length = yyleng;
+	data.parsed_text = (char*) malloc( (yyleng+1)*sizeof(char) ),
+		strncpy(data.parsed_text, yytext, yyleng+1);
+
+	user_instruction_input_cursor += yyleng;
+	data_stack.push(&data);
+	
+	return data.parsed_text_code;
+}
+
+
 int* parser_fastforward(unsigned int* number_of_codes)
 {
 	unsigned int ff_counter = 0u;
