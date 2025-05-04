@@ -10,6 +10,19 @@
 extern "C" int yylex();
 
 
+void parser_whitespace_processing(int number_of_whitespaces)
+{
+	user_instruction_input_cursor += number_of_whitespaces;
+	
+	struct parsed_data data;
+	data.parsed_text_code = WHITESPACE;
+	data.parsed_text_length = number_of_whitespaces;
+	data.parsed_text = NULL;
+	
+	data_stack.push(&data);
+}
+
+
 int parser_forward(void)
 {
 	struct parsed_data data;
