@@ -3,13 +3,7 @@
 
 #include "stack.shard.l"
 #include "parser_functions.shard.l"
-
-
-enum parsing_status
-{
-	PARSING_SUCCESSFUL,
-	PARSING_FAILED
-};
+#include "parsing_status.h"
 
 
 #define CREATE_CHECKPOINT(current_stack_top) \
