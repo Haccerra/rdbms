@@ -5,7 +5,6 @@
 #include "special_values.h"
 #include "console_formater.h"
 #include "checkpoint.h"
-#include "math_equation_checker.h"
 
 
 #include "data.shard.l"
@@ -176,7 +175,7 @@ int main(int argc, char** argv)
 		
 		unsigned int number_of_codes = 0;
 		int* codes = parser_fastforward(&number_of_codes);
-		math_equation_checker(codes, number_of_codes);
+
 		data_stack.clear();
 	}
 

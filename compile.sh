@@ -8,7 +8,7 @@ g++ -g \
 	-Icompiler/flexdata/shards \
 	-Icompiler/source \
 lex.yy.c \
-compiler/source/math_equation_checker.c \
+compiler/source/SQL_select_CFG.c \
 	-o a.out
 
 read -p "press key to continue"
