@@ -12,5 +12,5 @@ struct parsed_data
 };
 
 
-char  user_instruction_input_buffer[ALLOWED_EXPRESSION_SIZE];
-char* user_instruction_input_cursor = user_instruction_input_buffer;
+extern char  user_instruction_input_buffer[ALLOWED_EXPRESSION_SIZE];
+extern char* user_instruction_input_cursor;

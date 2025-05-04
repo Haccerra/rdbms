@@ -5,23 +5,18 @@
 #include "special_values.h"
 #include "console_formater.h"
 #include "checkpoint.h"
-#include "math_equation_checker.h"
+#include "SQL_select_CFG.h"
 
 
 #include "data.shard.l"
 #include "stack.shard.l"
 #include "parser_functions.shard.l"
-
-
-extern char  user_instruction_input_buffer[ALLOWED_EXPRESSION_SIZE];
-extern char* user_instruction_input_cursor;
-extern struct parsed_data_stack data_stack;
 %}
 
 
 %%
 \n { 
-	return NOT_IN_A_DICTIONARY; 
+	return END_OF_LINE; 
 }
 
 
@@ -155,6 +150,7 @@ extern struct parsed_data_stack data_stack;
 	          BOLD_TEXT BLINKING_TEXT TEXT_COLOUR_YELLOW "WARNING:" RESET_ALL_ATTRIBUTES
 	          " %s is not parsable.\n", yytext
 		  );
+	return NOT_IN_A_DICTIONARY;
 }
 %%
 
@@ -174,9 +170,31 @@ int main(int argc, char** argv)
 		parser_scanner(user_instruction_input_buffer);
 
 		
-		unsigned int number_of_codes = 0;
-		int* codes = parser_fastforward(&number_of_codes);
-		math_equation_checker(codes, number_of_codes);
+		enum parsing_status status = SQL_CFG_select_query();
+		printf (
+			       TEXT_COLOUR_MAGENTA "Parsed string: %s\n" RESET_ALL_ATTRIBUTES, user_instruction_input_buffer
+			   );
+
+		if (PARSING_FAILED == status)
+		{
+			printf(TEXT_COLOUR_YELLOW "Not an SQL sequence.\n\n" RESET_ALL_ATTRIBUTES);
+		}
+		else
+		{
+			printf(TEXT_COLOUR_GREEN "A valid SQL sequence.\n\n" RESET_ALL_ATTRIBUTES);
+			
+			while (data_stack.top_pointer >= 0)
+			{
+				printf( BOLD_TEXT TEXT_COLOUR_GREEN
+					"[%d], [%s]\n"
+					RESET_ALL_ATTRIBUTES,
+					data_stack.top_pointer, 
+					data_stack.peek()->parsed_text
+				);
+				data_stack.pop();
+			}
+		}
+
 		data_stack.clear();
 	}
 

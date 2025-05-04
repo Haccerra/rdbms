@@ -4,11 +4,14 @@ g++ -g \
 	-Iconsole \
 	-Icompiler/include \
 	-Icompiler/include/general \
-	-Icompiler/flexdata \
 	-Icompiler/flexdata/shards \
 	-Icompiler/source \
 lex.yy.c \
-compiler/source/math_equation_checker.c \
+compiler/source/SQL_select_CFG.c \
+compiler/source/checkpoint.c \
+compiler/flexdata/shards/data.shard.c \
+compiler/flexdata/shards/stack.shard.c \
+compiler/flexdata/shards/parser_functions.shard.c \
 	-o a.out
 
 read -p "press key to continue"
