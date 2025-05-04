@@ -20,13 +20,19 @@ extern struct parsed_data_stack data_stack;
 
 
 %%
-\n { return NOT_IN_A_DICTIONARY; }
+\n { 
+	return NOT_IN_A_DICTIONARY; 
+}
 
 
-[ ] { }
+[ ] { 
+	parser_whitespace_processing(1); 
+}
 
 
-\t { }
+\t { 
+	parser_whitespace_processing(4); 
+}
 
 
 "+"  { return OPERATOR_PLUS; }
