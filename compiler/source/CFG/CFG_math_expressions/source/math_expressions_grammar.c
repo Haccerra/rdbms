@@ -3,6 +3,7 @@
 #include "checkpoint.h"
 #include "types.h"
 #include "operators.h"
+#include <stdio.h>
 
 
 static parsing_status CFG_math_expression__E_second__(void);
@@ -50,12 +51,13 @@ parsing_status CFG_math_expression__E_first__(void)
 	int checkpoint;
 	create_checkpoint(&checkpoint);
 	
+	/* E' -> S'E" */
 	if (PARSING_FAILED == CFG_math_expression__S_first__())
 	{
 		restore_checkpoint(checkpoint);
 		return PARSING_FAILED;
 	}
-	
+
 	if (PARSING_FAILED == CFG_math_expression__E_second__())
 	{
 		restore_checkpoint(checkpoint);
@@ -107,6 +109,7 @@ static parsing_status CFG_math_expression__S_first__(void)
 	int checkpoint;
 	create_checkpoint(&checkpoint);
 	
+	/* S' -> W'S" */
 	if (PARSING_FAILED == CFG_math_expression__W_first__())
 	{
 		restore_checkpoint(checkpoint);
@@ -153,7 +156,8 @@ static parsing_status CFG_math_expression__S_second__(void)
 		return PARSING_SUCCESSFUL;
 	} while (0);
 	restore_checkpoint(checkpoint);
-	
+
+
 	/* $ */
 	return PARSING_SUCCESSFUL;
 }
@@ -185,10 +189,10 @@ static parsing_status CFG_math_expression__W_first__(void)
 		   (TYPE_REAL_NUMBERS_COLLECTION != code) && 
 		   (TYPE_VARIABLE != code)
 	   )
-   {
+    {
 	   restore_checkpoint(checkpoint);
 	   return PARSING_FAILED;
-   }
+    }
    
-   return PARSING_SUCCESSFUL;
+    return PARSING_SUCCESSFUL;
 }
