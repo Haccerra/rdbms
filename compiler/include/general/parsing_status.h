@@ -3,6 +3,6 @@
 
 enum parsing_status
 {
-	PARSING_SUCCESSFUL,
+	PARSING_SUCCESSFUL = 0u,
 	PARSING_FAILED
 };

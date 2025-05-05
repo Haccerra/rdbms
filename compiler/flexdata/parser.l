@@ -6,6 +6,9 @@
 #include "console_formater.h"
 #include "checkpoint.h"
 #include "SQL_select_CFG.h"
+#include "math_expressions_grammar.h"
+#include "math_inequality_expressions_grammar.h"
+#include "math_logical_expressions_grammar.h"
 
 
 #include "data.shard.l"
@@ -169,29 +172,102 @@ int main(int argc, char** argv)
 		}
 		parser_scanner(user_instruction_input_buffer);
 
-		
-		enum parsing_status status = SQL_CFG_select_query();
-		printf (
-			       TEXT_COLOUR_MAGENTA "Parsed string: %s\n" RESET_ALL_ATTRIBUTES, user_instruction_input_buffer
-			   );
 
-		if (PARSING_FAILED == status)
+		enum parsing_status status = CFG_math_inequality_expression__U__();
+		if (PARSING_FAILED != status)
 		{
-			printf(TEXT_COLOUR_YELLOW "Not an SQL sequence.\n\n" RESET_ALL_ATTRIBUTES);
-		}
-		else
-		{
-			printf(TEXT_COLOUR_GREEN "A valid SQL sequence.\n\n" RESET_ALL_ATTRIBUTES);
-			
+			printf (
+					   "Input %s is a valid mathematical "
+					   TEXT_COLOUR_GREEN BOLD_TEXT UNDERLINED_TEXT BLINKING_TEXT 
+					   " INEQUALITY " 
+					   RESET_ALL_ATTRIBUTES
+					   "expression.\n\n"
+					   , user_instruction_input_buffer
+				   );
+				   
+			printf ("*****************************************************\n");
 			while (data_stack.top_pointer >= 0)
 			{
-				printf( BOLD_TEXT TEXT_COLOUR_GREEN
-					"[%d], [%s]\n"
-					RESET_ALL_ATTRIBUTES,
-					data_stack.top_pointer, 
-					data_stack.peek()->parsed_text
-				);
+				printf( 
+						  BOLD_TEXT
+						  "[%d], [%s]\n"
+						  RESET_ALL_ATTRIBUTES,
+						  data_stack.top_pointer, 
+						  data_stack.peek()->parsed_text
+				      );
 				data_stack.pop();
+			}
+			printf ("*****************************************************\n\n");
+	    }
+		else
+		{
+			status = CFG_math_logical_expression__P__();
+			if (PARSING_FAILED != status)
+			{
+				printf (
+						   "Input %s is a valid mathematical "
+						   TEXT_COLOUR_GREEN BOLD_TEXT UNDERLINED_TEXT BLINKING_TEXT 
+						   " LOGICAL " 
+						   RESET_ALL_ATTRIBUTES
+						   "expression.\n\n"
+						   , user_instruction_input_buffer
+					   );
+					   
+				printf ("*****************************************************\n");
+				while (data_stack.top_pointer >= 0)
+				{
+					printf( 
+							  BOLD_TEXT
+							  "[%d], [%s]\n"
+							  RESET_ALL_ATTRIBUTES,
+							  data_stack.top_pointer, 
+							  data_stack.peek()->parsed_text
+						  );
+					data_stack.pop();
+				}
+				printf ("*****************************************************\n\n");
+			}
+			
+			
+			status = CFG_math_expression__E_first__();
+			int code = parser_forward();
+			if (END_OF_LINE != code)
+			{
+				printf(
+						  BOLD_TEXT UNDERLINED_TEXT TEXT_COLOUR_RED BLINKING_TEXT
+						  "Error! "
+						  RESET_ALL_ATTRIBUTES
+						  TEXT_COLOUR_RED
+						  "Input is not a valid mathematical expression.\n\n",
+						  RESET_ALL_ATTRIBUTES
+					  );
+			}
+			else if (PARSING_FAILED != status)
+			{
+				printf (
+						   TEXT_COLOUR_GREEN
+						   "Input %s is a valid mathematical expression.\n\n"
+						   RESET_ALL_ATTRIBUTES
+						   , user_instruction_input_buffer
+					   );
+					   
+				printf ("*****************************************************\n");
+				while (data_stack.top_pointer >= 0)
+				{
+					printf( 
+							  BOLD_TEXT
+							  "[%d], [%s]\n"
+							  RESET_ALL_ATTRIBUTES,
+							  data_stack.top_pointer, 
+							  data_stack.peek()->parsed_text
+						  );
+					data_stack.pop();
+				}
+				printf ("*****************************************************\n\n");
+			}
+			else
+			{
+				/* next scenario to be tested */
 			}
 		}
 
