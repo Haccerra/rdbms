@@ -8,6 +8,7 @@
 #include "SQL_select_CFG.h"
 #include "math_expressions_grammar.h"
 #include "math_inequality_expressions_grammar.h"
+#include "math_logical_expressions_grammar.h"
 
 
 #include "data.shard.l"
@@ -178,7 +179,7 @@ int main(int argc, char** argv)
 			printf (
 					   "Input %s is a valid mathematical "
 					   TEXT_COLOUR_GREEN BOLD_TEXT UNDERLINED_TEXT BLINKING_TEXT 
-					   " inequality " 
+					   " INEQUALITY " 
 					   RESET_ALL_ATTRIBUTES
 					   "expression.\n\n"
 					   , user_instruction_input_buffer
@@ -200,9 +201,36 @@ int main(int argc, char** argv)
 	    }
 		else
 		{
-			enum parsing_status status = CFG_math_expression__E_first__();
+			status = CFG_math_logical_expression__P__();
+			if (PARSING_FAILED != status)
+			{
+				printf (
+						   "Input %s is a valid mathematical "
+						   TEXT_COLOUR_GREEN BOLD_TEXT UNDERLINED_TEXT BLINKING_TEXT 
+						   " LOGICAL " 
+						   RESET_ALL_ATTRIBUTES
+						   "expression.\n\n"
+						   , user_instruction_input_buffer
+					   );
+					   
+				printf ("*****************************************************\n");
+				while (data_stack.top_pointer >= 0)
+				{
+					printf( 
+							  BOLD_TEXT
+							  "[%d], [%s]\n"
+							  RESET_ALL_ATTRIBUTES,
+							  data_stack.top_pointer, 
+							  data_stack.peek()->parsed_text
+						  );
+					data_stack.pop();
+				}
+				printf ("*****************************************************\n\n");
+			}
+			
+			
+			status = CFG_math_expression__E_first__();
 			int code = parser_forward();
-		
 			if (END_OF_LINE != code)
 			{
 				printf(

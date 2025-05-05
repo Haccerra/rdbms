@@ -12,6 +12,7 @@ compiler/source/SQL_select_CFG.c \
 compiler/source/checkpoint.c \
 compiler/source/CFG/CFG_math_expressions/source/math_expressions_grammar.c \
 compiler/source/CFG/CFG_math_expressions/source/math_inequality_expressions_grammar.c \
+compiler/source/CFG/CFG_math_expressions/source/math_logical_expressions_grammar.c \
 compiler/flexdata/shards/data.shard.c \
 compiler/flexdata/shards/stack.shard.c \
 compiler/flexdata/shards/parser_functions.shard.c \
